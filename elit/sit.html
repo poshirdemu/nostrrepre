@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Offset Example</title>
+    <style>
+        #scrollable {
+            width: 300px;
+            height: 200px;
+            overflow: auto;
+            border: 1px solid black;
+        }
+        .content {
+            width: 600px;
+            height: 400px;
+            background: linear-gradient(to right, red, yellow);
+        }
+    </style>
+</head>
+<body>
+
+<div id="scrollable">
+    <div class="content"></div>
+</div>
+
+<script>
+    const scrollable = document.getElementById('scrollable');
+
+    scrollable.addEventListener('scroll', () => {
+        // The scrollLeft and scrollTop properties give the content offset
+        const contentOffsetX = scrollable.scrollLeft;
+        const contentOffsetY = scrollable.scrollTop;
+
+        // The clientWidth and clientHeight properties give the size of the visible area
+        const visibleWidth = scrollable.clientWidth;
+        const visibleHeight = scrollable.clientHeight;
+
+        // Determine the visible rect
+        const visibleRect = {
+            left: contentOffsetX,
+            top: contentOffsetY,
+            right: contentOffsetX + visibleWidth,
+            bottom: contentOffsetY + visibleHeight
+        };
+
+        console.log('Visible Rect:', visibleRect);
+    });
+
+    // Initial log of the visible rect
+    scrollable.dispatchEvent(new Event('scroll'));
+</script>
+
+</body>
+</html>
